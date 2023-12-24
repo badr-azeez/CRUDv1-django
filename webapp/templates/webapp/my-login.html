@@ -3,31 +3,33 @@
 {% block content %}
 
 <div class="d-flex justify-content-center">
-    <div class="bg-secondary mt-3 shadow-md p-5 form-layout">
+    <div class="bg-secondary shadow-md p-5 form-layout form">
         <h2>Login </h2>
         <hr>
         <form active="{% url 'login' %}" method='POST' autocomplite='off'/>
         {% csrf_token %}
         {% for input in form %}
-            {{input.errors}}
-        <div class="mb-3">
-            <h5>{{input.label}}</h5>
-            <input name="{{input.name}}" type="{{input.name}}" class="form-control" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">{{input.help_text}}</div>
-            {% for error in input.errors %} 
-                  <div class="alert alert-danger mt-2">
-                       <strong>{{ error|escape }}</strong>
-                  </div>
-               {% endfor %}
-          </div>
-        <br>
+            <div class="mb-3">
+                <h5>{{input.label}}</h5>
+                {% if input.name == 'password' %}
+                    <input name="{{input.name}}" type="password" class="form-control" aria-describedby="emailHelp">
+                {% else %}
+                    <input name="{{input.name}}" type="text" class="form-control" aria-describedby="emailHelp">
+                {% endif %}
+                <div id="emailHelp" class="form-text">{{input.help_text}}</div>
+                {% for error in input.errors %} 
+                    <div class="alert alert-danger mt-2">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            </div>
         {%endfor%}
-        <button class='btn btn-success' type="submit">Login &nbsp;<i class="fa fa-key" aria-hidden="true"></i>
-        </button>
+        <br>
+        <button class='btn btn-success' type="submit">Login &nbsp;<i class="fa fa-key" aria-hidden="true"></i></button>
         </form>
         <br>
         <div class="text-center">
-            <h4>Dont Have Account</h4>
+            <h4>Don't Have Account</h4>
             <a class="text-info" href="{% url 'register'%}"><h5>Register</h5></a>
         </div>
     </div>  
