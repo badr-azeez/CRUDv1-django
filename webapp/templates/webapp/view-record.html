@@ -1,0 +1,81 @@
+{% extends "webapp/base.html" %}
+
+{% block content %}
+<div class="media align-items-center py-3 mb-3">
+    <div class="media-body ml-4">
+      <h4 class="font-weight-bold mb-0"><i class="fa fa-user" aria-hidden="true"></i> &nbsp;{{record.first_name}} {{record.last_name}}</h4>
+      <div class="text-muted mb-2">ID: {{record.id}}</div>
+      <a href="{% url 'update-record' record.id %}" class="btn btn-primary">Edit &nbsp;<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </a>&nbsp;
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Delete &nbsp;<i class="fa fa-trash-o" aria-hidden="true"></i>
+      </button>
+      
+    </div>
+    <hr>
+  </div>
+  <div class="card text-white bg-primary mb-3">
+      <table class="table-primary user-view-table m-0 table-bordered">
+        <tbody>
+          <tr>
+            <td>Email:</td>
+            <td>{{record.email}}</td>
+          </tr>
+          <tr>
+            <td>Phone:</td>
+            <td>{{record.phone}}</td>
+          </tr>
+          <tr>
+            <td>Address:</td>
+            <td>{{record.address}}</td>
+          </tr>
+          <tr>
+            <td>City:</td>
+            <td>{{record.city}}</td>
+          </tr>
+          <tr>
+            <td>Province:</td>
+            <td>{{record.province}}</td>
+          </tr>
+          <tr>
+            <td>Country:</td>
+            <td>{{record.country}}</td>
+          </tr>
+          <tr>
+            <td>Date Joined</td>
+            <td>{{record.creation_data}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+<!-- Button trigger modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-secondary">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         Are You Sure <strong>Delete</strong> ({{ record.first_name}} {{record.last_name}}) record ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete &nbsp; <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock%}
+
+
+
+
+
+

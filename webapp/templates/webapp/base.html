@@ -1,0 +1,35 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUDv1</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.superhero.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
+<body>
+    {% include "webapp/navbar.html" %}
+        <div class="container">
+
+            {% if messages %}
+                <ul id="messages" class="messages mt-2">
+                    {% for message in messages %}
+                        <div class="alert-dismissible fade show alert alert-{{ message.tags }}" role="alert">
+                            <i class="fa fa-check" aria-hidden="true"></i> &nbsp; {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% block content %}
+    
+            {% endblock %}
+            
+        </div>
+        {% include 'webapp/footer.html' %}  
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

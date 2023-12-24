@@ -1,0 +1,33 @@
+{% extends "webapp/base.html" %}
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <div class="bg-secondary mt-3 shadow-md p-5 form-layout">
+            <h2>Create Your Account</h2>
+            <p>Manager's Your Clients Today!</p>
+            <hr> 
+            <form active="{% url 'register' %}" method='POST' autocomplite='off'/>
+            {% csrf_token %}
+            {% for input in form %}
+            <div class="mb-3">
+                <h5>{{input.label}}</h5>
+                <input name="{{input.name}}" class="form-control" type="{{input.name}}" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">{{input.help_text}}</div>
+                {% for error in input.errors %} 
+                <div class="alert alert-danger mt-2">
+                        <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+            </div>
+            <br>
+            {%endfor%}
+            <button class='btn btn-success' type="submit">Create &nbsp; <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+            </form>
+            <br>
+            <div class="text-center">
+                <h4>Already Have Account?</h4>
+                <a class="text-info" href="{% url 'login' %}"><h5>Login </h5></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
